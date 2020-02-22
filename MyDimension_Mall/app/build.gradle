@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -27,4 +31,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.mcxiaoke.volley:library:1.0.19'
+
+    implementation 'com.jakewharton:butterknife:8.8.1'//快速生成id 点击事件
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    implementation "com.squareup.okhttp3:okhttp:4.4.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.4.0"   //日志拦截依赖
 }
