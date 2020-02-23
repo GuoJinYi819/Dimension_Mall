@@ -1,6 +1,4 @@
-package com.bw.mall.contractClass;
-
-import java.util.Map;
+package com.bw.mall.contractclass;
 
 /**
  * ClassName: MyDimension_Mall

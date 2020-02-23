@@ -1,6 +1,6 @@
 package com.bw.mall.mvp.register;
 
-import com.bw.mall.contractClass.RegisterContractClass;
+import com.bw.mall.contractclass.RegisterContractClass;
 import com.bw.mall.utils.NetUtil;
 
 import java.util.Map;

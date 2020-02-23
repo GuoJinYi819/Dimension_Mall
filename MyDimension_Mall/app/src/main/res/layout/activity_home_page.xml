@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".HomePageActivity">
-    <android.support.v4.view.ViewPager
+    <com.bw.mall.customview.MyViewPager
         android:id="@+id/home_vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    </android.support.v4.view.ViewPager>
+    </com.bw.mall.customview.MyViewPager>
 
     <!--<RadioGroup-->
         <!--android:id="@+id/tabs_rg"-->

@@ -1,6 +1,6 @@
 package com.bw.mall.mvp.login;
 
-import com.bw.mall.contractClass.LoginContractClass;
+import com.bw.mall.contractclass.LoginContractClass;
 import com.bw.mall.utils.NetUtil;
 
 import java.util.Map;

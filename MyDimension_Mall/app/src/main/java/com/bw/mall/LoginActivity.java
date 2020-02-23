@@ -1,7 +1,6 @@
 package com.bw.mall;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.text.method.HideReturnsTransformationMethod;
@@ -15,9 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bw.mall.base.BaseActivity;
-import com.bw.mall.base.BasePresenter;
 import com.bw.mall.bean.LoginRegisterBean;
-import com.bw.mall.contractClass.LoginContractClass;
+import com.bw.mall.contractclass.LoginContractClass;
 import com.bw.mall.mvp.login.LoginPresenterImpl;
 import com.bw.mall.utils.SpUtil;
 import com.google.gson.Gson;
@@ -157,8 +155,8 @@ public class LoginActivity extends BaseActivity<LoginPresenterImpl> implements L
 
         String message = bean.getMessage();
         if (message.contains("登陆失败,手机号或密码错误")) {
+            Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
             etPhone.setText("");
-            etPhone.setHint("登陆失败,手机号或密码错误");
         } else if(message.contains("登录成功")){
             Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
             //判断 记住密码是否选中

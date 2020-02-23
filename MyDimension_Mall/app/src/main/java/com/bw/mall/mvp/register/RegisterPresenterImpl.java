@@ -1,7 +1,7 @@
 package com.bw.mall.mvp.register;
 
 import com.bw.mall.base.BasePresenter;
-import com.bw.mall.contractClass.RegisterContractClass;
+import com.bw.mall.contractclass.RegisterContractClass;
 
 import java.util.Map;
 

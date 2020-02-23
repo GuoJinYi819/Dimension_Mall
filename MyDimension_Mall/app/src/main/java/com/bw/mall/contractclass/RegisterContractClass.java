@@ -1,4 +1,4 @@
-package com.bw.mall.contractClass;
+package com.bw.mall.contractclass;
 
 import java.util.Map;
 

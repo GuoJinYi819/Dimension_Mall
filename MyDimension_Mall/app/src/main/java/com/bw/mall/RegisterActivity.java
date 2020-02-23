@@ -1,12 +1,8 @@
 package com.bw.mall;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,14 +11,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bw.mall.base.BaseActivity;
-import com.bw.mall.base.BasePresenter;
 import com.bw.mall.bean.LoginRegisterBean;
-import com.bw.mall.contractClass.RegisterContractClass;
+import com.bw.mall.contractclass.RegisterContractClass;
 import com.bw.mall.mvp.register.RegisterPresenterImpl;
 import com.bw.mall.utils.NetUtil;
 import com.google.gson.Gson;
-
-import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -118,13 +111,14 @@ public class RegisterActivity extends BaseActivity<RegisterPresenterImpl> implem
         String message = loginRegisterBean.getMessage();
         if (message.contains("该手机号已注册，不能重复注册")) {
             editPhone.setText("");
-            editPhone.setHint("该手机号已注册 请重新输入！");
+            Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
         }else if(message.contains("手机号格式错误")){
             editPhone.setText("");
-            editPhone.setHint("手机号格式错误");
+            Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
         }else if(message.contains("密码不符合规范")){
             editPwd.setText("");
-            editPwd.setHint("密码太简单了");
+            Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
+
         }else if(message.contains("注册成功")){
             Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
             String phone = editPhone.getText().toString().trim();

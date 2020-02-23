@@ -3,10 +3,12 @@ package com.bw.mall;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.view.MotionEvent;
 
 import com.bw.mall.adapter.HomePageAdapter;
 import com.bw.mall.base.BaseActivity;
 import com.bw.mall.base.BasePresenter;
+import com.bw.mall.customview.MyViewPager;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -15,7 +17,7 @@ import butterknife.Unbinder;
 public class HomePageActivity extends BaseActivity {
 
     @BindView(R.id.home_vp)
-    ViewPager homeVp;
+    MyViewPager homeVp;
     @BindView(R.id.home_tab)
     TabLayout homeTab;
     private Unbinder unbinder;
@@ -61,29 +63,14 @@ public class HomePageActivity extends BaseActivity {
 
     }
 
+
     @Override
     protected void initListener() {
-        //设置ViewPager监听事件
-        homeVp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int i, float v, int i1) {
-                //页面滑动
-            }
-
-            @Override
-            public void onPageSelected(int i) {
-                //页面选中
-                homeTab.setScrollPosition(i,0,true);
-                TabLayout.Tab tabAt = homeTab.getTabAt(i);
-                //设置图标 根据选中的i下标
-                tabAt.setIcon(tabture[i]);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int i) {
-                //页面更改
-            }
-        });
+        //默认首页
+        homeTab.setScrollPosition(0,0,false);
+        TabLayout.Tab tabAt = homeTab.getTabAt(0);
+        tabAt.setIcon(tabture[0]);
+        //设置TabLayout 监听
         homeTab.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -101,7 +88,7 @@ public class HomePageActivity extends BaseActivity {
 
             @Override
             public void onTabReselected(TabLayout.Tab tab) {
-                //不知道
+                //重新选择
             }
         });
     }

@@ -1,7 +1,7 @@
 package com.bw.mall.mvp.login;
 
 import com.bw.mall.base.BasePresenter;
-import com.bw.mall.contractClass.LoginContractClass;
+import com.bw.mall.contractclass.LoginContractClass;
 
 import java.util.Map;
 
