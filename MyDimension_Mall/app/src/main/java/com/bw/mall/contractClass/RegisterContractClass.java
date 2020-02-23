@@ -11,14 +11,14 @@ import java.util.Map;
  */
 public class RegisterContractClass {
     //view 层
-    interface RegisterViewLayer{
+    public interface RegisterViewLayer{
         //成功
         void registerViewSuccess(String json);
         //失败
         void registerViewFail(String error);
     }
     //module层
-    interface RegisterModuleLayer{
+    public interface RegisterModuleLayer{
         void registerUser(String path, Map<String,String> param,RegisterModuleCallBack registerModuleCallBack);
         interface RegisterModuleCallBack{
             void registerModuleSuccess(String json);
@@ -26,7 +26,7 @@ public class RegisterContractClass {
         }
     }
     //presenter层
-    interface RegisterPresenterLayer{
+   public interface RegisterPresenterLayer{
         void registerUser(String path,Map<String,String> param);
     }
 }

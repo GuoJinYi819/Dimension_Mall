@@ -1,6 +1,11 @@
 package com.bw.mall;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -11,7 +16,13 @@ import android.widget.Toast;
 
 import com.bw.mall.base.BaseActivity;
 import com.bw.mall.base.BasePresenter;
+import com.bw.mall.bean.LoginRegisterBean;
+import com.bw.mall.contractClass.RegisterContractClass;
+import com.bw.mall.mvp.register.RegisterPresenterImpl;
 import com.bw.mall.utils.NetUtil;
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -19,7 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity<RegisterPresenterImpl> implements RegisterContractClass.RegisterViewLayer {
     @BindView(R.id.edit_phone)
     EditText editPhone;
     @BindView(R.id.edit_code)
@@ -53,6 +64,8 @@ public class RegisterActivity extends BaseActivity {
                 break;
             case R.id.ib_eye1:
                 //眼睛
+                //文本隐藏
+                editPwd.setTransformationMethod(PasswordTransformationMethod.getInstance());
                 break;
             case R.id.tv_register:
                 //立即登入  返回登入界面
@@ -60,23 +73,26 @@ public class RegisterActivity extends BaseActivity {
                 break;
             case R.id.btn_register:
                 //注册
+                String phone = editPhone.getText().toString().trim();
+                String pwd = editPwd.getText().toString().trim();
                 HashMap<String, String> hashMap = new HashMap<>();
-                hashMap.put("phone","15636463798");
-                hashMap.put("pwd","g123456");
+                hashMap.put("phone",phone);
+                hashMap.put("pwd",pwd);
                 NetUtil instance = NetUtil.getInstance();
-                instance.doPostUser("http://mobile.bwstudent.com/small/user/v1/register", hashMap, new NetUtil.NetCallBack() {
-                    @Override
-                    public void netSuccess(String json) {
-                        Log.i("aa", "netSuccess: "+json);
-                    }
-
-                    @Override
-                    public void netFiled(String error) {
-                        Toast.makeText(RegisterActivity.this, ""+error, Toast.LENGTH_SHORT).show();
-                    }
-                });
+                String path = "http://mobile.bwstudent.com/small/user/v1/register";
+                presenter.registerUser(path,hashMap);
                 break;
+
         }
+        ibEye1.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                //文本显示
+                editPwd.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                //返回 false 执行点击事件
+                return false;
+            }
+        });
     }
 
     @Override
@@ -90,8 +106,42 @@ public class RegisterActivity extends BaseActivity {
     }
 
     @Override
-    protected BasePresenter initPresenter() {
-        return null;
+    protected RegisterPresenterImpl initPresenter() {
+        return new RegisterPresenterImpl();
+    }
+
+    @Override
+    public void registerViewSuccess(String json) {
+        //解析
+        Gson gson = new Gson();
+        LoginRegisterBean loginRegisterBean = gson.fromJson(json, LoginRegisterBean.class);
+        String message = loginRegisterBean.getMessage();
+        if (message.contains("该手机号已注册，不能重复注册")) {
+            editPhone.setText("");
+            editPhone.setHint("该手机号已注册 请重新输入！");
+        }else if(message.contains("手机号格式错误")){
+            editPhone.setText("");
+            editPhone.setHint("手机号格式错误");
+        }else if(message.contains("密码不符合规范")){
+            editPwd.setText("");
+            editPwd.setHint("密码太简单了");
+        }else if(message.contains("注册成功")){
+            Toast.makeText(this, ""+message, Toast.LENGTH_SHORT).show();
+            String phone = editPhone.getText().toString().trim();
+            String pwd = editPwd.getText().toString().trim();
+            Intent intent = new Intent();
+            intent.putExtra("phone",phone);
+            intent.putExtra("pwd",pwd);
+            setResult(200,intent);
+            finish();
+            //注册成功
+        }
+    }
+
+    @Override
+    public void registerViewFail(String error) {
+        Toast.makeText(this, "异常 ！！一定是手机坏了", Toast.LENGTH_SHORT).show();
+
     }
 
 }

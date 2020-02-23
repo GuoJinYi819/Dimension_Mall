@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HomePageActivity">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/home_vp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v4.view.ViewPager>
+
+    <!--<RadioGroup-->
+        <!--android:id="@+id/tabs_rg"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:background="@mipmap/bg_homepage_bottom"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<RadioButton-->
+            <!--android:id="@+id/today_tab"-->
+            <!--android:button="@null"-->
+            <!--android:checked="true"-->
+            <!--android:layout_weight="1"-->
+            <!--android:background="@mipmap/common_tab_home_xhdpi"-->
+            <!--android:layout_height="30sp"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_marginTop="30dp"-->
+            <!--android:layout_marginLeft="25dp"/>-->
+
+        <!--<RadioButton-->
+            <!--android:layout_marginTop="30dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:id="@+id/record_tab"-->
+            <!--android:button="@null"-->
+            <!--android:background="@mipmap/common_tab_circle_n"-->
+            <!--android:layout_height="30sp"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_marginLeft="15dp"-->
+            <!--android:layout_marginRight="5dp"/>-->
+
+        <!--<RadioButton-->
+            <!--android:layout_marginTop="20dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:id="@+id/home_tab"-->
+            <!--android:button="@null"-->
+            <!--android:background="@mipmap/commom_tab_xhdpi"-->
+            <!--android:layout_height="90sp"-->
+            <!--android:layout_width="60dp"-->
+            <!--/>-->
+
+        <!--<RadioButton-->
+            <!--android:layout_weight="1"-->
+            <!--android:id="@+id/contact_tab"-->
+            <!--android:button="@null"-->
+            <!--android:background="@mipmap/common_tab_list_n_xhdpi"-->
+            <!--android:layout_height="30sp"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_marginTop="30dp"-->
+            <!--/>-->
+
+        <!--<RadioButton-->
+            <!--android:layout_marginTop="30dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:id="@+id/settings_tab"-->
+            <!--android:button="@null"-->
+            <!--android:background="@mipmap/common_tab_my_n_xhdpi"-->
+            <!--android:layout_height="30sp"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_marginLeft="20dp"-->
+            <!--android:layout_marginRight="25dp"/>-->
+    <!--</RadioGroup>-->
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:scaleType="fitXY"
+        android:layout_height="70dp"
+        android:src="@mipmap/bg_homepage_bottom"
+        android:layout_alignParentBottom="true"
+        />
+    <android.support.design.widget.TabLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/home_tab"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        android:scaleType="fitCenter"
+        android:background="@null"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.design.widget.TabLayout>
+
+</RelativeLayout>

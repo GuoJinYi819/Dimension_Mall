@@ -11,14 +11,14 @@ import java.util.Map;
  */
 public class LoginContractClass {
     //view 层
-    interface LoginViewLayer{
+    public interface LoginViewLayer{
         //成功
         void loginViewSuccess(String json);
         //失败
         void loginViewFail(String error);
     }
     //module层
-    interface LoginModuleLayer{
+    public interface LoginModuleLayer{
         void loginUser(String path, Map<String, String> param, LoginModuleCallBack loginModuleCallBack);
         interface LoginModuleCallBack{
             void loginModuleSuccess(String json);
@@ -26,7 +26,7 @@ public class LoginContractClass {
         }
     }
     //presenter层
-    interface LoginPresenterLayer{
+    public interface LoginPresenterLayer{
         void loginUser(String path, Map<String, String> param);
     }
 }

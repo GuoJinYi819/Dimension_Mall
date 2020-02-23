@@ -63,6 +63,7 @@
             android:textSize="18sp"
             android:textColor="#ffffff"
             android:background="@null"
+            android:password="true"
             />
         <TextView
             android:id="@+id/tv_code"

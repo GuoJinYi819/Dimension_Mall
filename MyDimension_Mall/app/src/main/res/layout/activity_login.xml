@@ -28,8 +28,10 @@
             android:textColorHint="#ffffff"
             android:hint="手机号"
             android:textColor="#ffffff"
+            android:phoneNumber="true"
             android:textSize="18sp"
             android:background="@null"
+            android:focusable="auto"
             />
     </LinearLayout>
     <TextView
@@ -64,6 +66,8 @@
             android:textSize="18sp"
             android:textColor="#ffffff"
             android:background="@null"
+            android:password="true"
+            android:focusable="auto"
             />
         <ImageButton
             android:id="@+id/ib_eye"
@@ -93,17 +97,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:buttonTint="#ffffff"
-            />
-        <TextView
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:text="记住密码"
             android:textColor="#ffffff"
-            android:layout_toRightOf="@id/check_box"
             android:layout_centerVertical="true"
             />
-
         <TextView
             android:id="@+id/tv_register"
             android:layout_width="wrap_content"

@@ -32,7 +32,7 @@ public class NetUtil {
     //定义静态实例
     private static NetUtil instance;
     private final OkHttpClient okHttpClient;
-    private Handler handler =new Handler(Looper.myLooper());
+    private Handler handler =new Handler();
 
     //构造方法私有化
     private NetUtil(){
@@ -58,24 +58,64 @@ public class NetUtil {
 
     //post请求
     public void doPostUser(String path, Map<String,String> param ,NetCallBack netCallBack){
-        //模板 添加数据
-        FormBody.Builder formbody = new FormBody.Builder();
+//        //构建请求体
+        FormBody.Builder formbody = new FormBody.Builder(); //构建
         //遍历map集合
-        Set<Map.Entry<String, String>> entries = param.entrySet();
-        for(Map.Entry<String,String> entry : entries ){
+        for(Map.Entry<String,String> entry : param.entrySet() ){
             String key = entry.getKey();
             String value = entry.getValue();
-            //添加
+            //添加键值
             formbody.add(key,value);
         }
-        RequestBody requestBody = formbody.build();
+        //创建请求体
+        RequestBody requestBody = formbody.build(); //构建完成  创建请求体
         //构建请求
         Request request = new Request.Builder()
                 .url(path)
-                .post(requestBody)
+                .post(requestBody) //添加请求体 body
                 .build();
         //创建Call对象
         Call call= okHttpClient.newCall(request);
+        //创建队列
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(@NotNull Call call, @NotNull IOException e) {
+                String message = e.getMessage();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        //切换主线程 回调数据
+                        netCallBack.netFiled(message);
+                    }
+                });
+            }
+
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+                ResponseBody body = response.body();
+                String json = body.string();
+                handler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        //切换主线程 回调数据
+                        netCallBack.netSuccess(json);
+                    }
+                });
+
+            }
+        });
+
+
+    }
+
+    //get请求
+    public void doGetData(String path,NetCallBack netCallBack){
+        //构建请求
+        Request request =new Request.Builder()
+                .url(path)
+                .build();
+        //创建Call对象
+        Call call = okHttpClient.newCall(request);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
@@ -95,16 +135,12 @@ public class NetUtil {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        netCallBack.netFiled(json);
+                        netCallBack.netSuccess(json);
                     }
                 });
-
             }
         });
-
-
     }
-
 
     //接口回调
     public interface NetCallBack{
